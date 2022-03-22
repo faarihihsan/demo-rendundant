@@ -1,0 +1,47 @@
+version: '3.4'
+services:
+#  gremlin:
+#    image: gremlin/gremlin
+#    networks:
+#      - host
+#    cap_add:
+#      - NET_ADMIN
+#      - SYS_BOOT
+#      - SYS_TIME
+#      - KILL
+#    pid: "host"
+#    volumes:
+#      - "/mnt/d/skripsi/code/demo/gremlin_data/var/lib/gremlin:/var/lib/gremlin"
+#      - "/mnt/d/skripsi/code/demo/gremlin_data/var/log/gremlin:/var/log/gremlin"
+#      - "/mnt/d/skripsi/code/demo/gremlin_data/var/run/docker.sock:/var/run/docker.sock"
+#    environment:
+#      - GREMLIN_TEAM_ID=ee3d6ad0-cfe5-4421-bd6a-d0cfe5b421e0
+#      - GREMLIN_TEAM_SECRET=ab49ff18-00fa-432b-89ff-1800fa632be0
+  backend-1:
+    build:
+      context: .
+    container_name: backend-1
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_APPLICATION_JSON: '{
+            "server.port" : "8081"
+          }'
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
+  backend-2:
+    build:
+      context: .
+    container_name: backend-2
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_APPLICATION_JSON: '{
+              "server.port" : "8082"
+            }'
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
