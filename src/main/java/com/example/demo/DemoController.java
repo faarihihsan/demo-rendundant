@@ -18,6 +18,6 @@ public class DemoController {
 
     @GetMapping(value = "/")
     public String getRequest() {
-        return "Berhasil Get";
+        return "Bersadadhasil Get";
     }
 }
